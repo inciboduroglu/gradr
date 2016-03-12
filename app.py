@@ -6,9 +6,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/cakes')
+@app.route('/mocha')
 def cakes():
-	return 'Yummy cakes!'
+	return 'mocha cokolade!'
 
 @app.route('/hello/<name>')
 def hello(name):
