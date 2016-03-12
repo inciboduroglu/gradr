@@ -1,3 +1,4 @@
+CDApplet==1.0
 CDBashApplet==1.0
 Django==1.9.4
 Flask==0.10.1
