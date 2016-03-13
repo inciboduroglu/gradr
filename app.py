@@ -10,9 +10,9 @@ def index():
 def note():
 	return render_template('note.html')
 
-@app.route('/mocha')
+@app.route('/grade')
 def cakes():
-	return 'mocha cokolade!'
+	return render_template('grade.html')
 
 @app.route('/hello/')
 def hello_empty():
