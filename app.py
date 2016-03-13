@@ -19,19 +19,19 @@ def note():
 def upload_file():
     if request.method == 'POST':
         f = request.files['user_file']
-        f.save()
-        #f.save(os.path.join(app.config['UPLOAD_FOLDER']))
+        f.save(os.path.join(app.config['UPLOAD_FOLDER']))
+    return 'OK'
 
 @app.route('/grade')
-def cakes():
+def grade():
 	return render_template('grade.html')
 
-@app.route('/hello/')
-def hello_empty():
+@app.route('/team/')
+def team_empyt():
 	return 'isim yok :s'
 
 @app.route('/team/<name>')
-def hello(name):
+def team(name):
 	return render_template('team.html', name=name)
 
 if __name__ == '__main__':
