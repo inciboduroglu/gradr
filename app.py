@@ -10,7 +10,7 @@ def index():
 def cakes():
 	return 'mocha cokolade!'
 
-@app.route(('/hello', defaults={'name': None})
+@app.route('/hello', defaults={'name': None})
 
 @app.route('/hello/<name>')
 def hello(name):
