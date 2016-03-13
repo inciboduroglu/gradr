@@ -2,11 +2,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        f = request.files['user_essay']
-        f.save('/var/www/uploads/uploaded_file.txt')
 
 @app.route('/')
 def index():
@@ -15,6 +10,12 @@ def index():
 @app.route('/note')
 def note():
 	return render_template('note.html')
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['user_file']
+        f.save('/var/www/uploads/uploaded_file.txt')
 
 @app.route('/grade')
 def cakes():
