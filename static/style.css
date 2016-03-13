@@ -2,6 +2,12 @@ body {
     background: white;
     color: green;
 }
+h1 {
+      /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 405px;
+    /* To see the outline of the form */
+}
 form {
     /* Just to center the form on the page */
     margin: 0 auto;
