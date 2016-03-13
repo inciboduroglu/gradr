@@ -19,7 +19,8 @@ def note():
 def upload_file():
     if request.method == 'POST':
         f = request.files['user_file']
-        f.save('/var/www/uploads/uploaded_file.txt')
+        f.save()
+        #f.save(os.path.join(app.config['UPLOAD_FOLDER']))
 
 @app.route('/grade')
 def cakes():
