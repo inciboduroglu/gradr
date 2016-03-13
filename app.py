@@ -6,6 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/note')
+def note():
+	return render_template('note.html')
+
 @app.route('/mocha')
 def cakes():
 	return 'mocha cokolade!'
