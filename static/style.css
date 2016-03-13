@@ -16,7 +16,7 @@ a:active{ /* For links that you are clicking on */
 text-decoration: none; 
 color: blue; 
 }
-h1,h2 {
+h1 {
       /* Just to center the form on the page */
     margin: 0 auto;
     text-align: center;
