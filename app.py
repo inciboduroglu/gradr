@@ -10,7 +10,9 @@ def index():
 def cakes():
 	return 'mocha cokolade!'
 
-@app.route('/hello', defaults={'name': None})
+@app.route('/hello')
+def hello_empty():
+	return 'isim gir :s'
 
 @app.route('/hello/<name>')
 def hello(name):
