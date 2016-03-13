@@ -2,10 +2,24 @@ body {
     background: white;
     color: green;
 }
-h1 {
+a{ 
+text-decoration: none;
+text-align: center;
+} 
+a:hover{ /* For when your mouse hovers over the element */ 
+text-decoration: underline; 
+} 
+a:visited{ /* For links that are in the browser history (Previously visited) */ text-decoration: none; 
+color: purple; 
+} 
+a:active{ /* For links that you are clicking on */ 
+text-decoration: none; 
+color: blue; 
+}
+h1,h2 {
       /* Just to center the form on the page */
     margin: 0 auto;
-    width: 405px;
+    text-align: center;
     /* To see the outline of the form */
 }
 form {

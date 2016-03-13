@@ -23,11 +23,11 @@ def cakes():
 
 @app.route('/hello/')
 def hello_empty():
-	return 'isim gir :s'
+	return 'isim yok :s'
 
-@app.route('/hello/<name>')
+@app.route('/team/<name>')
 def hello(name):
-	return render_template('page.html', name=name)
+	return render_template('team.html', name=name)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
