@@ -29,13 +29,13 @@ def note():
 def grade():
 	return render_template('grade.html')
 
-#@app.route('/team/')
-#def team_empyt():
-#	return 'isim yok :s'
+@app.route('/page/')
+def team_empyt():
+	return 'isim yok :s'
 
-@app.route('/team/<name>')
-def team(name):
-	return render_template('team.html', name=name)
+@app.route('/page/<name>')
+def page(name):
+	return render_template('page.html', name=name)
 
 def allowed_file(filename):
     return '.' in filename and \
