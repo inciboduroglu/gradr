@@ -41,7 +41,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route('/upload2', methods=['GET', 'POST'])
+@app.route('/uploads', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['user_file']
@@ -59,6 +59,7 @@ def upload_file():
          <input type=submit value=Upload>
     </form>
     '''
+
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
