@@ -33,9 +33,9 @@ def grade():
 def team_empyt():
 	return 'isim yok :s'
 
-@app.route('/page/<name>')
-def page(name):
-	return render_template('page.html', name=name)
+@app.route('/team/<name>')
+def team(name):
+	return render_template('team.html', name=name)
 
 def allowed_file(filename):
     return '.' in filename and \
