@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for, send_from_directory, render_template
+from flask import Flask, request, redirect, url_for, send_from_directory, render_template 
 from werkzeug import secure_filename
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -29,9 +29,9 @@ def note():
 def grade():
 	return render_template('grade.html')
 
-@app.route('/team/')
-def team_empyt():
-	return 'isim yok :s'
+#@app.route('/team/')
+#def team_empyt():
+#	return 'isim yok :s'
 
 @app.route('/team/<name>')
 def team(name):
@@ -68,5 +68,3 @@ def uploaded_file(filename):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-
-
