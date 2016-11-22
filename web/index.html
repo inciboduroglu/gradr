@@ -30,17 +30,19 @@
 		<div class="row">
 		  	<div class="col-xs-12 col-md-8">
 			  	<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"></span>
-					<textarea type="text" class="form-control" placeholder="Paste your text here" aria-describedby="basic-addon1" rows="25em"></textarea>
+					<span class="input-group-addon" id="basic-addon1" style="height:25em"></span>
+					<!---<textarea type="text" class="form-control" placeholder="Paste your text here" aria-describedby="basic-addon1" rows="25em"></textarea>-->
+					<div type="text" contenteditable="true" class="form-control" placeholder="Paste your text here" aria-describedby="basic-addon1" style="height:25em" id="essay-div"></div>
 				</div>
 			</div>
 			<!-- On rows -->
 			<div class="col-xs-6 col-md-4">
 				<div style="padding-top:0.5ems"> <!-- Warning panels -->
 					<span class="label label-default">Default</span></div>
-					<p id="essay">Some long text. still going, still going, still going. very long text this one</p>
+					<p id="default-div">Some long text. still going, still going, still going. very long text this one</p>
 				<div style="padding-top:0.5em">
 					<span class="label label-primary">Primary</span></div>
+					<p>Text kutusuna bir seyler yaz. Link'e basınca Default altindaki yazi degisecek, Button'a basinca tekrar degisecek. Input text kutusundaki butun yaziyi bold yapar.</p>
 				<div style="padding-top:0.5em">
 					<span class="label label-success">Success</span></div>
 				<div style="padding-top:0.5em">
@@ -55,25 +57,43 @@
 		<div class="col-xs-12 col-md-8 text-right" style="padding-top:1em">
 				<a class="btn btn-default" href="#" role="button" onclick="func_call()">Link</a>
 				<button class="btn btn-default" type="submit" onclick="grade()">Button</button>
-				<input class="btn btn-default" type="button" value="Input">
-				<input class="btn btn-default" type="submit" value="Submit">
+				<input class="btn btn-default" type="button" value="Input" onclick="bold()">
+				<input class="btn btn-default" type="submit" value="Submit" onclick="highlight()">
 			</div>
 	</div>
 
     <script>
 		function grade() {
-		    document.getElementById("essay").innerHTML = "Paragraph changed.";
+		    document.getElementById("default-div").innerHTML = "Paragraph changed.";
 		}
 	</script>
 	<script>
 		function func_call(){
-			document.getElementById("essay").innerHTML = "Paragraph changed again.";
+			document.getElementById("default-div").innerHTML = "Paragraph changed again.";
 			$.ajax({
 				type: "POST",
 				url: "~/pythoncode.py"
 				}).done(function( o ) {
 					alert('o')
 			});
+		}
+	</script>
+	<script>
+		function bold(){
+			var essay_div = document.getElementById("essay-div");
+			var essay = essay_div.innerHTML;
+
+			essay_div.innerHTML = essay.bold();
+		}
+	</script>
+	<script>
+		function highlight(){
+			var essay_div = document.getElementById("essay-div");
+			var essay = essay_div.innerHTML;
+
+			var ind = 2;
+			var len = 3;
+			essay_div.innerHTML = essay.substring(0, ind) + "<span style='background-color:yellow'>" + essay.substring(ind, ind+len) + "</span>" + essay.substring(ind+len, essay.length);
 		}
 	</script>
   </body>
