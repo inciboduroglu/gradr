@@ -45,17 +45,20 @@
 					<p>Text kutusuna bir seyler yaz. Link'e basınca Default altindaki yazi degisecek, Button'a basinca tekrar degisecek. Input text kutusundaki butun yaziyi bold yapar.</p>
 				<div style="padding-top:0.5em">
 					<span class="label label-success">Success</span></div>
+					<p id="success-div"></p>
 				<div style="padding-top:0.5em">
 					<span class="label label-info">Info</span></div>
 				<div style="padding-top:0.5em">
 					<span class="label label-warning">Warning</span></div>
+					<p id="warning-div"></p>
 				<div style="padding-top:0.5em">
 					<span class="label label-danger">Danger</span></div>
+					<p id="danger-div"></p>
 				
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-8 text-right" style="padding-top:1em">
-				<a class="btn btn-default" href="#" role="button" onclick="func_call()">Link</a>
+				<button class="btn btn-default" href="#" role="button" onclick="func_call()">Link</button>
 				<button class="btn btn-default" type="submit" onclick="grade()">Button</button>
 				<input class="btn btn-default" type="button" value="Input" onclick="bold()">
 				<input class="btn btn-default" type="submit" value="Submit" onclick="highlight()">
@@ -70,11 +73,28 @@
 	<script>
 		function func_call(){
 			document.getElementById("default-div").innerHTML = "Paragraph changed again.";
+			var essay = document.getElementById("essay-div").innerHTML;
+
 			$.ajax({
 				type: "POST",
-				url: "~/pythoncode.py"
-				}).done(function( o ) {
-					alert('o')
+				url: "/cgi-bin/pythoncode.py",
+				data: {essay: essay},
+				dataType: "json",
+				
+				success:function(suc) {
+					//console.log(suc);	// bunu acarsan console.log'da objeyi gorebilirsin
+					var dat = suc;	// dat variable'ina al
+					// essayi text areaya yaz
+					document.getElementById("essay-div").innerHTML = dat[0].essay; 
+					console.log(dat[0].spell[0]); // spell objenin icinde ayri bir array oldugu
+													// icin boyle erisilcek
+				},
+				error:function(f, fail){
+					document.getElementById("danger-div").innerHTML = f.statusText;
+					document.getElementById("warning-div").innerHTML = fail.statusText;
+					console.log(f);
+					console.log(fail);
+				}
 			});
 		}
 	</script>
