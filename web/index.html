@@ -5,11 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>GRADR</title>
+    <title>Gradr</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<?php include upload.php; ?>
 	<style>
+	
+	#logo
+	{
+		margin: 2em;
+		margin-left: 30em;
+	}
+	#essay-div
+	{
+		word-wrap: break-word;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
 	p.results-header
 	{
 		font-weight: bold;
@@ -32,7 +45,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 
-    <h1 style="padding-left:1em" >Gradr Demo</h1>
+    <!--<h1 style="padding-left:1em" >Gradr Demo</h1>-->
+	<img src="logo.png" id="logo">
 
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 	<div class="container-fluid" style="padding-top:1em">
@@ -66,7 +80,16 @@
 					<p id="danger-div"></p>
 				
 			</div>
+			
 		</div>
+				<div class="col-xs-12 col-md-8 text-right" style="padding-top:1em">
+				<form action="upload.php" method="post" enctype="multipart/form-data">
+
+				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input class="btn btn-default" type="submit" value="Upload" name="submit">
+				</form>
+		</div>
+		
 		<div class="col-xs-12 col-md-8 text-right" style="padding-top:1em">
 				<button class="btn btn-default" href="#" role="button" onclick="func_call()">Link</button>
 				<button class="btn btn-default" type="submit" onclick="grade()">Button</button>
@@ -134,6 +157,12 @@
 			results_div.innerHTML = results;
 		}
 		
+	</script>
+	<script>
+		function upload_error()
+		{
+			alert("File extension has to be .txt");
+		}
 	</script>
   </body>
 </html>
