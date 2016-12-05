@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import numpy as np
 from sklearn.externals import joblib as jb
+import pickle
 
 
 def learn(X, y):
@@ -22,7 +23,9 @@ def learn(X, y):
     deviation(y, y_rbf)
 
     # pickle model
-    jb.dump(svr_rbf, 'rbfmodel.pkl')
+    # jb.dump(svr_rbf, 'rbfmodel.pkl')
+    with open('rbfmodel.pkl', 'wb') as f:
+        pickle.dump(svr_rbf, f)
 
 
 def test(X, y):
@@ -57,17 +60,22 @@ data = np.load('traindata.npy')
 # mix data
 dummy = np.arange(data_num).reshape((data_num, 1))
 dummy = np.concatenate((dummy, data), axis=1)
-dummy = np.random.permutation(data)
+dummy = np.random.permutation(dummy)
+
+# print(dummy)
 
 # separate data
-X = dummy[:, 1:data.shape[1] - 2] # data num at[0]
-y = dummy[:, data.shape[1] - 1]
+X = dummy[:, 1:dummy.shape[1] - 1]  # data num at[0]
+y = dummy[:, dummy.shape[1] - 1]
+
+# print(X.shape[1])
+# print(y)
 
 train_num = np.int(np.ceil(0.7 * data_num))
 train_X = X[0:train_num, :]
 train_y = y[0:train_num]
 
-test_X = X[train_num:y.shape[0], :]
+test_X = X[train_num:X.shape[0], :]
 test_y = y[train_num:y.shape[0]]
 
 learn(train_X, train_y)

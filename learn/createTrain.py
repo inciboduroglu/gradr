@@ -1,8 +1,8 @@
-import xlrd
+from tempfile import TemporaryFile
 import numpy as np
+import xlrd
 from procEssay import preproc as pr
 from procEssay import featExt as fe
-from tempfile import TemporaryFile
 
 # Creates training data features
 
