@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Gradr</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 					<span class="label label-primary">Primary</span></div>
 					<p>Text kutusuna bir seyler yaz. Link'e basınca Default altindaki yazi degisecek, Button'a basinca tekrar degisecek. Input text kutusundaki butun yaziyi bold yapar.</p>
 				<div style="padding-top:0.5em">
-					<span class="label label-success">Success</span></div>
+					<span class="label label-success">Grade</span></div>
 					<p id="success-div"></p>
 				<div style="padding-top:0.5em">
 					<span class="label label-info">Info</span></div>
@@ -77,17 +77,20 @@
 
 			$.ajax({
 				type: "POST",
-				url: "/cgi-bin/pythoncode.py",
+				url: "/cgi-bin/encoder.py",
 				data: {essay: essay},
 				dataType: "json",
 				
 				success:function(suc) {
-					//console.log(suc);	// bunu acarsan console.log'da objeyi gorebilirsin
+					console.log(suc);	// bunu acarsan console.log'da objeyi gorebilirsin
 					var dat = suc;	// dat variable'ina al
 					// essayi text areaya yaz
 					document.getElementById("essay-div").innerHTML = dat[0].essay; 
 					console.log(dat[0].spell[0]); // spell objenin icinde ayri bir array oldugu
 													// icin boyle erisilcek
+
+					console.log('grade: ' + grade);
+					document.getElementById("success-div").innerHTML = dat[0].grade;
 				},
 				error:function(f, fail){
 					document.getElementById("danger-div").innerHTML = f.statusText;
