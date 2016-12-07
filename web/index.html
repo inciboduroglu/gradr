@@ -33,7 +33,7 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]> bkhbhılhu
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -106,16 +106,21 @@
 	<script>
 		function func_call(){
 			document.getElementById("default-div").innerHTML = "Paragraph changed again.";
-			var current_data = document.getElementById("essay-div").innerHTML;
+			var essay = document.getElementById("essay-div").innerHTML;
 
 			$.ajax({
 				type: "POST",
 				url: "/cgi-bin/pythoncode.py",
-				data: "inci=" + current_data,
+				data: {essay: essay},
+				dataType: "json",
 				
 				success:function(suc) {
-					alert(JSON.parse(suc).text)
-					document.getElementById("success-div").innerHTML = JSON.parse(suc).text;
+					//console.log(suc);	// bunu acarsan console.log'da objeyi gorebilirsin
+					var dat = suc;	// dat variable'ina al
+					// essayi text areaya yaz
+					document.getElementById("essay-div").innerHTML = dat[0].essay; 
+					console.log(dat[0].spell[0]); // spell objenin icinde ayri bir array oldugu
+													// icin boyle erisilcek
 				},
 				error:function(f, fail){
 					document.getElementById("danger-div").innerHTML = f.statusText;
