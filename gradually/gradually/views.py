@@ -2,6 +2,7 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 import json
 from gradually.grade import predict
+from gradually.grade import grammar
 import sys
 
 def index(request):
@@ -14,15 +15,37 @@ def grade(request):
     #predict_result = predict.predict(essay_text)
     predict_result = predict.predict(essay_text)[0]
     print (predict_result)
+    
+    grammar_errors = grammar.grammar(essay_text)
+    print(type(grammar_errors))
+    grammar_list = []
+    correction_list = []
+    for match in grammar_errors:
+        m = match.msg
+        c = match.replacements
+        print(match)
+        grammar_list.append(m)
+        correction_list.append(c)
+    grammar_list_j = json.dumps(grammar_list, default=obj_dict)
+    correction_list_j = json.dumps(correction_list, default=obj_dict)
+    #testing 1 2 3
+    for match in grammar_errors:
+        print(match)
+    
     #"Nope. Not even going to bother analyzing that. Good luck. \
                      #<br> (actually I would but it does not work yet.)"
-    return JsonResponse({'essay': essay_text,
-                         'spell': "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
-                         'grade': predict_result
+    return JsonResponse({'essay'     : essay_text,
+                         'spell'     : "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
+                         'grade'     : predict_result,
+						 'grammar'   : grammar_list_j,
+						 'correction': correction_list_j
                          # "aundera - that <b>cunt</b> <br> also <b>dat</b> <i>non-escaped</i> output\
                          # <br> <img src=http://cultofthepartyparrot.com/parrots/parrot.gif> "
                         }, safe=False)
 
+def obj_dict(obj):
+    return obj.__dict__
+						
 def gradefile(request):
     file_contents = str(request.FILES.get("fileToUpload").read(), "utf-8")
     print(file_contents)

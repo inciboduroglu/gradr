@@ -79,7 +79,7 @@
 					<p id="default-div">Some long text. still going, still going, still going. very long text this one</p>
 				<div style="padding-top:0.5em">
 					<span class="label label-primary">Primary</span></div>
-					<p>Text kutusuna bir seyler yaz. Link'e basınca Default altindaki yazi degisecek, Button'a basinca tekrar degisecek. Input text kutusundaki butun yaziyi bold yapar.</p>
+					<p id="primary-div">Text kutusuna bir seyler yaz. Link'e basınca Default altindaki yazi degisecek, Button'a basinca tekrar degisecek. Input text kutusundaki butun yaziyi bold yapar.</p>
 				<div style="padding-top:0.5em">
 					<span class="label label-success">Grade</span></div>
 					<p id="success-div"></p>
@@ -140,6 +140,9 @@
 					console.log('grade: ' + grade);
 					document.getElementById("success-div").innerHTML = dat.grade;
 					document.getElementById("info-div").innerHTML = dat.spell;
+					//burada grammar dediği hata mesajları correction dediği suggestionlar
+					document.getElementById("default-div").innerHTML = dat.grammar;
+					document.getElementById("primary-div").innerHTML = dat.correction;
 				},
 				error:function(f, fail){
 					document.getElementById("danger-div").innerHTML = f.statusText;
