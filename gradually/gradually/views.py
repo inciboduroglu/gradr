@@ -28,9 +28,24 @@ def grade(request):
         correction_list.append(c)
     grammar_list_j = json.dumps(grammar_list, default=obj_dict)
     correction_list_j = json.dumps(correction_list, default=obj_dict)
-    #testing 1 2 3
+    
+    words = []
     for match in grammar_errors:
-        print(match)
+        word = []
+        for letter in range(match.fromx, match.tox):
+            word.append(essay_text[letter])
+        words.append(word)
+        word = []
+    
+    i = 0
+    for word in words:
+        words[i] = ''.join(map(str,words[i]))
+        i = i+1
+    print (words)
+    wrong_words = json.dumps(words, default=obj_dict)
+    #testing 1 2 3
+    #for match in grammar_errors:
+    #    print(match)
     
     #"Nope. Not even going to bother analyzing that. Good luck. \
                      #<br> (actually I would but it does not work yet.)"
@@ -38,7 +53,8 @@ def grade(request):
                          'spell'     : "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
                          'grade'     : predict_result,
 						 'grammar'   : grammar_list_j,
-						 'correction': correction_list_j
+						 'correction': correction_list_j,
+						 'wrong_words': wrong_words
                          # "aundera - that <b>cunt</b> <br> also <b>dat</b> <i>non-escaped</i> output\
                          # <br> <img src=http://cultofthepartyparrot.com/parrots/parrot.gif> "
                         }, safe=False)

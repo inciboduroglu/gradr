@@ -141,8 +141,9 @@
 					document.getElementById("success-div").innerHTML = dat.grade;
 					document.getElementById("info-div").innerHTML = dat.spell;
 					//burada grammar dediği hata mesajları correction dediği suggestionlar
-					document.getElementById("default-div").innerHTML = dat.grammar;
+					//document.getElementById("default-div").innerHTML = dat.grammar;
 					document.getElementById("primary-div").innerHTML = dat.correction;
+					document.getElementById("default-div").innerHTML = dat.wrong_words;
 				},
 				error:function(f, fail){
 					document.getElementById("danger-div").innerHTML = f.statusText;
