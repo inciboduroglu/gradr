@@ -32,6 +32,9 @@ def predict(essay):
 
     grade = model.predict(feat_mtx)
 
+    if feat['spell_err_cnt']/feat['word_cnt'] > 0.3:
+        grade = 0
+    
     return grade * 100
 
 # predict('essay')
