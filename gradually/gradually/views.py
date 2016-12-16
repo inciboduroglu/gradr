@@ -12,13 +12,20 @@ def grade(request):
     essay_text = request.POST.get("essay")
     print(essay_text)
     #predict_result = predict.predict(essay_text)
-    predict_result = predict.predict(essay_text)[0]
-    print (predict_result)
+    predict_result = predict.predict(essay_text)
+
+    if isinstance(predict_result, float) or isinstance(predict_result, int):
+        grade = predict_result
+    else:
+        grade = predict_result[0]
+
+    print (grade)
     #"Nope. Not even going to bother analyzing that. Good luck. \
                      #<br> (actually I would but it does not work yet.)"
     return JsonResponse({'essay': essay_text,
+                        'parrot': "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
                          'spell': "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
-                         'grade': predict_result
+                         'grade': grade
                          # "aundera - that <b>cunt</b> <br> also <b>dat</b> <i>non-escaped</i> output\
                          # <br> <img src=http://cultofthepartyparrot.com/parrots/parrot.gif> "
                         }, safe=False)

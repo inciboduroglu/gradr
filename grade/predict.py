@@ -33,7 +33,10 @@ def predict(essay):
     grade = model.predict(feat_mtx.reshape((1, 6)))
     print(grade*100)
 
-    return grade * 100
+    if feat['spell_err_cnt'] / feat['word_cnt'] > 0.3:
+        return 0
+    else:
+        return grade * 100
 
 
 # predict('Dear local newspaper, I think effects computers have on people are great learning skills/affects because they'

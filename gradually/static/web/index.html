@@ -59,7 +59,7 @@
     <script src="/static/web/js/bootstrap.min.js"></script>
 
     <!--<h1 style="padding-left:1em" >Gradr Demo</h1>-->
-	<img src="/static/web/logo.png" id="logo">
+	<img src="/static/web/logogradr.png" id="logo">
 
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 	<div class="container-fluid" style="padding-top:1em">
@@ -74,15 +74,15 @@
 			<!-- On rows -->
 			<div class="col-xs-6 col-md-4">
 				<div style="padding-top:0.5ems"> <!-- Warning panels -->
-					<span class="label label-default">Default</span></div>
+					<span class="label label-default">Spelling</span></div>
 					<p id="spell-header" class="results-header"><p>
-					<p id="default-div">Some long text. still going, still going, still going. very long text this one</p>
+					<p id="default-div"></p>
 				<div style="padding-top:0.5em">
-					<span class="label label-primary">Primary</span></div>
-					<p>Text kutusuna bir seyler yaz. Link'e basınca Default altindaki yazi degisecek, Button'a basinca tekrar degisecek. Input text kutusundaki butun yaziyi bold yapar.</p>
+					<span class="label label-primary">Grammar</span></div>
+					<p></p>
 				<div style="padding-top:0.5em">
 					<span class="label label-success">Grade</span></div>
-					<p id="success-div"></p>
+					<p style='font-size: 5em;'id="success-div"></p>
 				<div style="padding-top:0.5em">
 					<span class="label label-info">Info</span></div>
 					<p id="info-div"></p>
@@ -104,22 +104,18 @@
 		</div>
 		
 		<div class="col-xs-12 col-md-8 text-right" style="padding-top:1em">
-				<button class="btn btn-default" href="#" role="button" onclick="func_call()">Link</button>
-				<button class="btn btn-default" type="submit" onclick="grade()">Button</button>
+				<button class="btn btn-default" href="#" role="button" onclick="grade()">Grade</button>
+				<!-- <button class="btn btn-default" type="submit" onclick="grade()">Button</button> -->
 				<input class="btn btn-default" type="button" value="Input" onclick="test()">
 				<input class="btn btn-default" type="submit" value="Submit" onclick="highlight()">
 			</div>
 	</div>
 
-    <script>
-
-		function grade() {
-		    document.getElementById("default-div").innerHTML = "Paragraph changed.";
-		}
-	</script>
 	<script>
-		function func_call(){
-			document.getElementById("default-div").innerHTML = "Paragraph changed again.";
+		function grade(){
+			document.getElementById("success-div").innerHTML = " ";
+			document.getElementById("warning-div").innerHTML = " ";
+			document.getElementById("danger-div").innerHTML = " ";
 			var essay = document.getElementById("essay-div").textContent;
 
 			$.ajax({
@@ -138,8 +134,9 @@
 													// AMA ARTIK OYLE DEGIL MUHAHAHAH.
 
 					console.log('grade: ' + grade);
-					document.getElementById("success-div").innerHTML = dat.grade;
-					document.getElementById("info-div").innerHTML = dat.spell;
+					var grade = round(dat.grade, 2); // 1.01
+					document.getElementById("success-div").innerHTML = grade + dat.parrot;
+					document.getElementById("info-div").innerHTML = dat.spell[0];
 				},
 				error:function(f, fail){
 					document.getElementById("danger-div").innerHTML = f.statusText;
@@ -148,6 +145,10 @@
 					console.log(fail);
 				}
 			});
+		}
+
+		function round(value, decimals) {
+  			return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 		}
 
 		function upload_file(){
