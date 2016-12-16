@@ -24,7 +24,7 @@ def grade(request):
                      #<br> (actually I would but it does not work yet.)"
     return JsonResponse({'essay': essay_text,
                         'parrot': "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
-                         'spell': spell,
+                         'spell': "<img src=http://cultofthepartyparrot.com/parrots/parrot.gif>",
                          'grade': grade
                          # "aundera - that <b>cunt</b> <br> also <b>dat</b> <i>non-escaped</i> output\
                          # <br> <img src=http://cultofthepartyparrot.com/parrots/parrot.gif> "
