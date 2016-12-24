@@ -24,10 +24,12 @@ for j in range(data_num):
     # get essay from dataset
     set = sheet.cell(j + 1, 1).value
     set = int(set)
-
+    print('set: ')
+    print(set)
     if set in [2, 3, 4, 6, 8]:
-        essay = sheet.cell(i + 1, 2).value
-        label = sheet.cell(i + 1, 6).value
+        essay = sheet.cell(j + 1, 2).value
+        label = sheet.cell(j + 1, 6).value
+        print(label)
 
         # pre process and extract features
         essay = pr.preproc(essay)
@@ -51,7 +53,7 @@ for j in range(data_num):
         # data[i, data.shape[1] - 1] = new_label
 
         i += 1
-        print(j)
+        print(new_label)
 
 # print(i)
 print(feat_mtx)
